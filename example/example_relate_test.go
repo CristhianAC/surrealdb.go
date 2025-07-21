@@ -8,7 +8,6 @@ import (
 	"github.com/surrealdb/surrealdb.go/pkg/models"
 )
 
-//nolint:funlen
 func ExampleRelate() {
 	db := newSurrealDBWSConnection("query", "person", "follow")
 
@@ -62,6 +61,9 @@ func ExampleRelate() {
 	if relateErr := surrealdb.Relate(
 		db,
 		&surrealdb.Relationship{
+			// ID is currently ignored, and the relation will have a generated ID.
+			// If you want to set the ID, use InsertRelation, or use
+			// Query with `RELATE` statement.
 			ID:       &models.RecordID{Table: "follow", ID: "first_second"},
 			In:       first.ID,
 			Out:      second.ID,
